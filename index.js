@@ -15,10 +15,12 @@ const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
-    
+   
+    if(inputValue!="" && inputValue!=" " )
+    {
     push(shoppingListInDB, inputValue)
     
-    clearInputFieldEl()
+    clearInputFieldEl()}
 })
 
 onValue(shoppingListInDB, function(snapshot) {
@@ -26,6 +28,7 @@ onValue(shoppingListInDB, function(snapshot) {
         let ThingsArray = Object.entries(snapshot.val())
     
         clearShoppingListEl()
+        // console.log(ThingsArray)
         
         for (let i = 0; i < ThingsArray.length; i++) {
             let currentThing = ThingsArray[i]
@@ -50,6 +53,7 @@ function clearInputFieldEl() {
 function appendThingToShoppingListEl(Thing) {
     let ThingID = Thing[0]
     let ThingValue = Thing[1]
+    // console.log(ThingValue)
     
     let newEl = document.createElement("li")
     
